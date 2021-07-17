@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_networking_api/Learn_2/PostDataApi.dart';
 import 'package:flutter_networking_api/model/modelPost.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: postDataApi(),
     );
   }
 }
