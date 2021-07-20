@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
 //  Get and display data
   Future<Post> getPostById() async {
     http.Response futurePost = await http.get(url);
-    if (futurePost.statusCode == 200) {
+    if (futurePost.statusCode == 201) {
 //      print(futurePost.body);
       return Post.fromJson(json.decode(futurePost.body));
     } else {
