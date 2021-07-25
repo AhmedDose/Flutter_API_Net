@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_networking_api/NetWork/api.dart';
+import 'package:flutter_networking_api/model/auther.dart';
 
 class addAuther extends StatefulWidget {
   @override
@@ -8,19 +9,21 @@ class addAuther extends StatefulWidget {
 
 class _addAutherState extends State<addAuther> {
   var AutherName;
-  TextEditingController Acontroll=TextEditingController();
-
+  // addAutherkey == هوا عبارة عن اي دي لشاشة معينة
+  final addAuther = GlobalKey<ScaffoldState>();
+  TextEditingController Acontroll = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    AutherName=Acontroll.text;
+    AutherName = Acontroll.text;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: addAuther,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -39,7 +42,12 @@ class _addAutherState extends State<addAuther> {
                 onPressed: () {
                   // send data
 
-                  API.creatAuther(AutherName);
+                  API.creatAuther(AutherName).then((Auther) {
+                    // show snikbar
+                    //لعرض النتيجة
+                    addAuther.currentState!.showSnackBar(
+                        SnackBar(content: Text('add ${Auther.id}')));
+                  });
                 },
                 child: Text('Save'),
               )
