@@ -1,18 +1,37 @@
+// To parse this JSON data, do
+//
+//     final auther4 = auther4FromJson(jsonString);
+
+import 'dart:convert';
+
+List<Auther4> auther4FromJson(String str) => List<Auther4>.from(json.decode(str).map((x) => Auther4.fromJson(x)));
+
+String auther4ToJson(List<Auther4> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Auther4 {
+  Auther4({
+    required this.userId,
+    required this.id,
+    required  this.title,
+    required this.body,
+  });
+
   int userId;
   int id;
   String title;
-  int body;
-  Auther4(
-      {required this.id,
-      required this.body,
-      required this.title,
-      required this.userId});
-  factory Auther4.fromJson(Map<String, dynamic> author) => Auther4(
-      id: author['id'],
-      userId: author['userId'],
-      title: author['title'],
-      body: author['body']);
-  Map<String, dynamic> toJson() =>
-      {'userId': userId, 'id': id, 'title': title, 'body': body};
+  String body;
+
+  factory Auther4.fromJson(Map<String, dynamic> json) => Auther4(
+    userId: json["userId"],
+    id: json["id"],
+    title: json["title"],
+    body: json["body"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "userId": userId,
+    "id": id,
+    "title": title,
+    "body": body,
+  };
 }

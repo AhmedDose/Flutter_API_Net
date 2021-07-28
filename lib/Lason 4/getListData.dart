@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_networking_api/Lason%203/addAuther3.dart';
+import 'package:flutter_networking_api/Lason_5/updetAuther.dart';
 import 'package:flutter_networking_api/NetWork/api.dart';
 import 'package:flutter_networking_api/model/auther4.dart';
 
@@ -10,6 +11,7 @@ class Home4 extends StatefulWidget {
 
 class _HomeState4 extends State<Home4> {
   late Future<List<Auther4>> authors;
+
   @override
   void initState() {
     super.initState();
@@ -34,16 +36,32 @@ class _HomeState4 extends State<Home4> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, i) {
                   return Card(
-                    child: ListTile(
-                      title: Text(snapshot.data![i].title),
-                      subtitle: Row(
-                        children: <Widget>[
-                          Text(snapshot.data![i].body.toString()),
-                          SizedBox(
-                            width: 100,
-                          ),
-                          Text('${snapshot.data![i].id}'),
-                        ],
+                    child: Dismissible(
+                      key: ObjectKey(snapshot.data![i].id),
+                      onDismissed: (direction) {
+                        //   2   او  3  يستعمل لتحديد حركة السحب
+//                      print(direction.index);
+
+                        API.deletAuther(snapshot.data![i].id);
+                      },
+                      child: ListTile(
+                        onTap: () {
+//                          Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (context) =>
+//                                      UpdateAuthor(snapshot.data![i])));
+                        },
+                        title: Text(snapshot.data![i].title),
+                        subtitle: Row(
+                          children: <Widget>[
+//                          Text(snapshot.data![i].body.toString()),
+                            SizedBox(
+                              width: 100,
+                            ),
+                            Text('${snapshot.data![i].id}'),
+                          ],
+                        ),
                       ),
                     ),
                   );
